@@ -45,60 +45,67 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Título'),
-            ),
-            TextField(
-              keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-              controller: _valueController,
-              decoration: const InputDecoration(labelText: 'Valor (R\$)'),
-            ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'Nenhuma data selecionada!'
-                          : 'Data atual: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                decoration: const InputDecoration(labelText: 'Título'),
+              ),
+              TextField(
+                keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                controller: _valueController,
+                decoration: const InputDecoration(labelText: 'Valor (R\$)'),
+              ),
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'Nenhuma data selecionada!'
+                            : 'Data atual: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: _showDatePicker,
+                    TextButton(
+                      onPressed: _showDatePicker,
+                      child: const Text(
+                        'Selecionar data',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _submitForm();
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll<Color>(Colors.amber),
+                    ),
                     child: const Text(
-                      'Selecionar data',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      'Adicionar transação',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    _submitForm();
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll<Color>(Colors.amber),
-                  ),
-                  child: const Text(
-                    'Adicionar transação',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
