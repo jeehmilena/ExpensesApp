@@ -121,21 +121,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: appBar,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (_showChart || !isLandscape)
-              SizedBox(
-                height: availableHeight * (isLandscape ? 0.7 : 0.3),
-                child: TransactionChart(_recentTransactionsWeek),
-              ),
-            if (!_showChart)
-              SizedBox(
-                height: availableHeight * (isLandscape ? 1 : 0.7),
-                child: TransactionList(_transactions, _removeTransaction),
-              ),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_showChart || !isLandscape)
+                SizedBox(
+                  height: availableHeight * (isLandscape ? 0.7 : 0.3),
+                  child: TransactionChart(_recentTransactionsWeek),
+                ),
+              if (!_showChart)
+                SizedBox(
+                  height: availableHeight * (isLandscape ? 1 : 0.7),
+                  child: TransactionList(_transactions, _removeTransaction),
+                ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
