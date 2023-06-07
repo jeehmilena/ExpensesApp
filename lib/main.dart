@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       actions: [
         if (isLandscape)
           IconButton(
-            icon: Icon(_showChart ? Icons.format_list_numbered : Icons.bar_chart),
+            icon: Icon(_showChart ? Icons.format_list_numbered : Icons.show_chart),
             onPressed: () {
               setState(() {
                 _showChart = !_showChart;
@@ -127,12 +127,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             if (_showChart || !isLandscape)
               SizedBox(
-                height: availableHeight * 0.30,
+                height: availableHeight * (isLandscape ? 0.7 : 0.3),
                 child: TransactionChart(_recentTransactionsWeek),
               ),
             if (!_showChart)
               SizedBox(
-                height: availableHeight * 0.70,
+                height: availableHeight * (isLandscape ? 1 : 0.7),
                 child: TransactionList(_transactions, _removeTransaction),
               ),
           ],
