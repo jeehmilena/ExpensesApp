@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
+import 'adaptative_date_picker.dart';
 import 'adaptative_text_field.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -71,40 +71,30 @@ class _TransactionFormState extends State<TransactionForm> {
                 keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
                 onSubmitted: (_) => _submitForm(),
               ),
-              SizedBox(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null
-                            ? 'Nenhuma data selecionada!'
-                            : 'Data atual: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: _showDatePicker,
-                      child: const Text(
-                        'Selecionar data',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
+              AdaptativeDatePicker(
+                selectedDate: _selectedDate,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectedDate = newDate;
+                  });
+                },
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _submitForm();
-                    },
-                    style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll<Color>(Colors.amber),
-                    ),
-                    child: const Text(
-                      'Adicionar transação',
-                      style: TextStyle(color: Colors.black),
+                  Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(Colors.amber),
+                      ),
+                      child: const Text(
+                        'Adicionar transação',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                 ],

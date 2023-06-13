@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               if (_showChart || !isLandscape)
                 SizedBox(
-                  height: availableHeight * (isLandscape ? 0.7 : 0.3),
+                  height: availableHeight * (isLandscape ? 0.7 : 0.2),
                   child: TransactionChart(_recentTransactionsWeek),
                 ),
               if (!_showChart)
